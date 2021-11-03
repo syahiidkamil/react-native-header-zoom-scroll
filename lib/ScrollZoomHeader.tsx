@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Animated, Platform, StatusBar, ScrollViewProps } from 'react-native'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
-const statusBarHeight: number = Platform.OS == 'ios' ? getStatusBarHeight() : StatusBar.currentHeight || 0
+
 export interface Props extends ScrollViewProps {
     headerComponent?: React.ComponentType<any> | React.ReactElement | null,
     headerHeight: number | 0,
@@ -9,14 +9,14 @@ export interface Props extends ScrollViewProps {
     smallHeaderHeight: number | 0,
     contentSmallHeader: React.ComponentType<any> | React.ReactElement | null,
     statusBarBackground: string | 'transparent',
-    fadeSmallHeader: boolean | false
+    fadeSmallHeader: boolean | false,
+    statusBarCurrentHeight: number | 0
 }
 const ScrollZoomHeader: React.FC<Props> = (props) => {
+    const statusBarHeight: number = Platform.OS == 'ios' ? getStatusBarHeight() : props.statusBarCurrentHeight || 0
     const distanceHeader = props.headerHeight - props.smallHeaderHeight - statusBarHeight
     const ref = React.useRef(0);
     const scrollY = new Animated.Value(ref.current);
-
-
 
     let translateYCardTop = scrollY.interpolate({
         inputRange: [0, distanceHeader],
@@ -36,7 +36,6 @@ const ScrollZoomHeader: React.FC<Props> = (props) => {
     let translateYHeaderComponent = scrollY.interpolate({
         inputRange: [0, 1],
         outputRange: [0, -1],
-        // extrapolate: 'clamp',
     });
 
     const renderBackgroundHeaderComponent = React.useMemo(() => props.backgroundHeaderComponent, [props.backgroundHeaderComponent])
