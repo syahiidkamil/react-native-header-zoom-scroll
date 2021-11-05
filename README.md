@@ -1,6 +1,11 @@
-# react-native-header-zoom-scroll
+# @syahiidkamil/react-native-header-zoom-scroll
+
+this is a lib forked from https://github.com/thanhvd152/react-native-header-zoom-scroll
 
 Easily create ScrollView with Animation zoom header, with lots of customization
+
+
+
 <p align="center">
 <img src="https://github.com/thanhvd152/react-native-header-zoom-scroll/blob/main/demo/demo.gif?raw=true" height="500" />
 </p>
@@ -14,7 +19,7 @@ Easily create ScrollView with Animation zoom header, with lots of customization
 # Setup
 
 
-This library is available on npm, install it with: `npm i react-native-header-zoom-scroll` or `yarn  add react-native-header-zoom-scroll`.
+This library is available on npm, install it with: `npm i @syahiidkamil/react-native-header-zoom-scroll` or `yarn  add @syahiidkamil/react-native-header-zoom-scroll`.
 
 # Usage
 
@@ -87,6 +92,8 @@ export default App;
 | contentSmallHeader            | JSXAttribute      | null                           | content of small header                                                                                   |
 | fadeSmallHeader               | bool              | false                          | animation fade smallHeader when scroll                                                                    |
 | statusBarBackground           | string            | transparent                    | Background statusbar                                                                                      |
+| statusBarCurrentHeight           | number            | 0                    | Android status bar height (StatusBar.currentHeight)                                                                                      |
+| scrollViewRef           | Ref<ScrollView>            | undefined                    | Android status bar height (StatusBar.currentHeight)
                                 
                                 
 

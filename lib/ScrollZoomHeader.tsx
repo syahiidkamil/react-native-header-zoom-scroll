@@ -1,5 +1,6 @@
-import React from 'react'
-import { StyleSheet, View, Animated, Platform, StatusBar, ScrollViewProps } from 'react-native'
+import React, { Ref }  from 'react';
+import { StyleSheet, View, Animated, Platform, StatusBar, ScrollViewProps, ScrollView } from 'react-native'
+
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
 export interface Props extends ScrollViewProps {
@@ -10,7 +11,8 @@ export interface Props extends ScrollViewProps {
     contentSmallHeader: React.ComponentType<any> | React.ReactElement | null,
     statusBarBackground: string | 'transparent',
     fadeSmallHeader: boolean | false,
-    statusBarCurrentHeight: number | 0
+    statusBarCurrentHeight: number | 0,
+    scrollViewRef: Ref<ScrollView>
 }
 const ScrollZoomHeader: React.FC<Props> = (props) => {
     const statusBarHeight: number = Platform.OS == 'ios' ? getStatusBarHeight() : props.statusBarCurrentHeight || 0
@@ -41,10 +43,12 @@ const ScrollZoomHeader: React.FC<Props> = (props) => {
     const renderBackgroundHeaderComponent = React.useMemo(() => props.backgroundHeaderComponent, [props.backgroundHeaderComponent])
     const renderContentSmallHeader = React.useMemo(() => props.contentSmallHeader, [props.contentSmallHeader])
     const renderHeaderComponent = React.useMemo(() => props.headerComponent, [props.headerComponent])
+
     return (
         <>
             <Animated.ScrollView
                 {...props}
+                ref={props.scrollViewRef}
                 scrollEventThrottle={1}
                 onScroll={Animated.event(
                     [
